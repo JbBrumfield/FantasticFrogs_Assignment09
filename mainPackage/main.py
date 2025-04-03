@@ -1,6 +1,6 @@
 # File Name : main.py
 # Student Name: Jacob Brumfield, Nikki Carfora, Ray Happel
-# email:  brumfijb@mail.uc.edu
+# email:  brumfijb@mail.uc.edu, happelrc@mail.uc.edu
 # Assignment Number: Assignment 09
 # Due Date:  4/3/2025
 # Course #/Section:  IS 4010 001
@@ -9,13 +9,14 @@
 
 # Brief Description of what this module does: This module initializes the databaseManagement class and 
 # randomly selects the productID and states the manufacurer that created the product.
-# Citations: 
+# Citations: In Class work, https://stackoverflow.com/questions/28981770/store-sql-result-in-a-variable-in-python, 
 
 # Anything else that's relevant:
 
 import pyodbc
 import random
 from dataPackage.databaseManagement import *
+
 
 def main():
     # Initialize database management
@@ -50,6 +51,16 @@ def main():
         print(f"The manufacturer of this product is: {manufacturer_name}")
     else:
         print(f"Manufacturer with ID {manufacturer_id} not found.")
+
+    manufacturer_id = dbm.get_manufacturer_id(manufacturer_id)
+
+    brand_name = dbm.fetch_brand_name(brand_id, conn)
+    if brand_name:
+        print(f"The brand of this product is: {brand_id}")
+    else: 
+        print(f"Brand with ID {brand_id} not found.")
+    
+    brand_id = dbm.get_brand_id(brand_id, conn)
 
 if __name__ == "__main__":
     main()

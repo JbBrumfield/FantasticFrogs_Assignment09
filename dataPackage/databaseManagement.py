@@ -1,6 +1,6 @@
 # File Name : databaseManagement.py
 # Student Name: Jacob Brumfield, Nikki Carfora, Ray Happel
-# email:  brumfijb@mail.uc.edu
+# email:  brumfijb@mail.uc.edu, happelrc@mail.uc.edu
 # Assignment Number: Assignment 09
 # Due Date:  4/3/2025
 # Course #/Section:  IS 4010 001
@@ -8,7 +8,7 @@
 # Brief Description of the assignment:  Connect to the professors SQL database to produce interesting results
 
 # Brief Description of what this module does: This module connects to our SQL database GroceryStoreSimulator and querys the database for different information.
-# Citations: 
+# Citations: In Class work, https://stackoverflow.com/questions/28981770/store-sql-result-in-a-variable-in-python, 
 
 # Anything else that's relevant:
 
@@ -48,16 +48,36 @@ class databaseManagement:
             print(f"Error executing query: {e}")
             return None
 
-    def fetch_manufacturer_name(self, manufacturer_id, conn):
+    def fetch_manufacturer_name(self, manufacturer_id, brand_id, conn):
         """
         Fetches the manufacturer's name by ManufacturerID.
         @param manufacturer_id: The ManufacturerID to look up.
         @param conn: The connection object.
         @return: Manufacturer name or None if not found.
         """
-        sql = f"SELECT Manufacturer FROM tManufacturer WHERE ManufacturerID = {manufacturer_id}"
+        sql = f"SELECT Manufacturer, Brand FROM tManufacturer, tBrand WHERE ManufacturerID, BrandID = {manufacturer_id, brand_id}"
         results = self.submit_sql_to_server(sql, conn)
         if results and len(results) > 0:
             return results[0][0]  # Manufacturer name is in the second coloumn. 
         else:
             return None
+    
+    # Me and Jacob agreed to comment this out for, we can delete it later on/in the morning
+    # def fetch_brand_name(self, brand_id, conn):
+        """
+        Fetches the brand's name by BrandID.
+        @param brand_id: The BrandID to lookup.
+        @param conn: The connection objec
+        @return: Manufacturer name or None if not found
+        """
+        """ 
+        sql = f"SELECT Brand FROM tBrand WHERE BrandID = {brand_id}"
+        results = self.submit_sql_to_server(sql, conn)
+        if results and len(results) > 0:
+            return results[0][0]  # Since we repeated steps 3 and 4, Brand name is in the Second coloumn. 
+        else:
+            return None # Return None if Brand name is invalid
+        """
+
+
+        
